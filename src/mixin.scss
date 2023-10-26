@@ -1,0 +1,49 @@
+@import "./variables.scss";
+
+@mixin f-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin f-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin center-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin robo-light {
+  font-family: $roboto;
+  font-weight: 400;
+}
+
+@mixin robo-bold {
+  font-family: $roboto-b;
+  font-weight: 700;
+}
+
+@mixin rslab-light {
+  font-family: $robo-slab-var;
+  font-weight: 500;
+}
+
+@mixin rslab-bold {
+  font-family: $robo-slab-var;
+  font-weight: 700;
+}
+
+@mixin rslab-extra-bold {
+  font-family: $robo-slab-var;
+  font-weight: 900;
+}
