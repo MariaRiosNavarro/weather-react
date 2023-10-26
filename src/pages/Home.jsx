@@ -80,7 +80,7 @@ const Home = () => {
             console.error("Error fetching data:", error);
           });
       });
-      //  if no geocalisation -> use a random city of the randomCity-array
+      //  no geocalisation -> use a random city of the randomCity-array
     } else {
       setGeolocalitation(false);
       //   noGeoMessage visibility:visible!
