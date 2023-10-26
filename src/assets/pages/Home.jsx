@@ -41,7 +41,7 @@ const Home = (props) => {
     // function to change the object for all lat and lon
     const fetchParams = (lat, lon) => {
       return (fetchObj = {
-        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=a210fd9e00bee0d760dcfd2fc1cb1ef5`,
+        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=a210fd9e00bee0d760dcfd2fc1cb1ef5`,
         message: `With the Geolocalisation and Fetch of this Place: lat:${lat} & lon:${lon} was an Issue`,
       });
     };
@@ -97,6 +97,27 @@ const Home = (props) => {
   timezone = weatherData.city.timezone;
   sunrise = weatherData.city.sunrise;
   sunset = weatherData.city.sunset;
+
+  let weatherList = weatherData.city.list;
+  let weatherListIndex;
+  let oneWeatherDataObject = weatherList[weatherListIndex];
+
+  let dateString, date, temp, min, max, humidity, wind, clouds;
+
+  dateString = oneWeatherDataObject.dt_text;
+  date = oneWeatherDataObject.dt;
+  temp = oneWeatherDataObject.main.temp;
+  min = oneWeatherDataObject.main.temp_min;
+  max = oneWeatherDataObject.main.temp_max;
+  humidity = oneWeatherDataObject.main.humidity;
+  wind = oneWeatherDataObject.wind.speed;
+  clouds = oneWeatherDataObject.clouds.all;
+
+  let weatherText, weatherDescription, icon;
+
+  weatherText = oneWeatherDataObject.weather.main;
+  weatherDescription = oneWeatherDataObject.weather.description;
+  icon = oneWeatherDataObject.weather.icon;
 
   return (
     <>
