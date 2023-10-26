@@ -7,6 +7,25 @@ import { countries } from "../db/countries";
 import NoGeo from "../components/NoGeo/NoGeo";
 import Loading from "../components/Loading/Loading";
 import Card from "../components/Card/Card";
+import WeatherCard from "../components/WeatherCard/WeatherCard";
+
+// Help Object and Function for the Outputs
+
+const dayParts = {
+  "Early Morning": ["03:00:00", "06:00:00"],
+  Morning: ["09:00:00", "12:00:00"],
+  Afternoon: ["15:00:00", "18:00:00"],
+  Night: ["21:00:00", "00:00:00"],
+};
+
+function getPartOfDay(timeValue) {
+  for (const part in dayParts) {
+    if (dayParts[part].includes(timeValue)) {
+      return part;
+    }
+  }
+  return console.log("Dont find the Time Value");
+}
 
 // Create a universal Fetch function
 
@@ -95,11 +114,18 @@ const Home = () => {
     country.code === countryCode ? (countryName = country.name) : ""
   );
 
+  // Coords:
+
+  const coords = `${weatherData.city.coord.lat} / ${weatherData.city.coord.lat}`;
+
   // Conversion date & Time
 
   const dateTime = weatherData.list[0].dt_txt;
   const dateReverse = dateTime.split(" ")[0];
-  const time = dateTime.split(" ")[1].slice(0, -3);
+  const timeComplete = dateTime.split(" ")[1];
+  const time = timeComplete.slice(0, -3);
+
+  const dayPartOfTime = getPartOfDay(timeComplete);
 
   const dateParts = dateReverse.split("-");
   const date = dateParts.reverse().join("/");
@@ -144,43 +170,43 @@ const Home = () => {
 
   // ! Values for the WeatherCard
 
-  // let weatherList = weatherData.city.list;
-  // let weatherListIndex;
-  // let oneWeatherDataObject = weatherList[weatherListIndex];
+  const tempNow = weatherData.list[0].main.temp;
+  const minNow = weatherData.list[0].main.temp_min;
+  const maxNow = weatherData.list[0].main.temp_max;
+  const humidityNow = weatherData.list[0].main.humidity;
+  const windsNow = weatherData.list[0].wind.speed;
+  const cloudsNow = weatherData.list[0].clouds.all;
+  const textNow = weatherData.list[0].weather[0].main;
+  const descriptionNow = weatherData.list[0].weather[0].description;
+  const iconNow = weatherData.list[0].weather[0].icon;
 
-  // let dateString, date, temp, min, max, humidity, wind, clouds;
-
-  // dateString = oneWeatherDataObject.dt_text;
-  // date = oneWeatherDataObject.dt;
-  // temp = oneWeatherDataObject.main.temp;
-  // min = oneWeatherDataObject.main.temp_min;
-  // max = oneWeatherDataObject.main.temp_max;
-  // humidity = oneWeatherDataObject.main.humidity;
-  // wind = oneWeatherDataObject.wind.speed;
-  // clouds = oneWeatherDataObject.clouds.all;
-
-  // let weatherText, weatherDescription, icon;
-
-  // weatherText = oneWeatherDataObject.weather.main;
-  // weatherDescription = oneWeatherDataObject.weather.description;
-  // icon = oneWeatherDataObject.weather.icon;
-
-  const cardProps = weatherData.city;
+  const iconSrc = `https://openweathermap.org/img/wn/${iconNow}@2x.png`;
 
   return (
     <>
       <h1>Props Weather</h1>
-      {/* <h2>The weather for the next few days around the world</h2> */}
       {!geolocalitation ? <NoGeo /> : ""}
       <section>
         <Card
           name={name}
           country={countryName}
-          cityWeather={cardProps}
+          coords={coords}
+          partDay={dayPartOfTime}
           sunrise={sunrise}
           sunset={sunset}
           date={date}
           time={time}
+        />
+        <WeatherCard
+          iconSrc={iconSrc}
+          text={textNow}
+          temp={tempNow}
+          min={minNow}
+          max={maxNow}
+          humidity={humidityNow}
+          wind={windsNow}
+          clouds={cloudsNow}
+          description={descriptionNow}
         />
       </section>
     </>
