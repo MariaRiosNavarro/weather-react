@@ -1,9 +1,9 @@
 // import { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
-import "./Card.css";
+import "./WeatherCard.scss";
 
-const Card = () => {
+const WeatherCard = () => {
   // const [count, setCount] = useState(0);
   // useEffect(() => {
   //   console.log(count);
@@ -11,7 +11,7 @@ const Card = () => {
 
   return (
     <>
-      <h1>Card</h1>
+      <h1>WeatherCard</h1>
       <section>
         {/* <article>
           <h2>{props.property}</h2>
@@ -30,8 +30,8 @@ const Card = () => {
   );
 };
 
-// Card.propTypes = {
+// WeatherCard.propTypes = {
 //   property: PropTypes.string,
 // };
 
-export default Card;
+export default WeatherCard;

@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+// import { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
+// import PropTypes from "prop-types";
 import "./Button.scss";
 
-const Button = (props) => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    console.log(count);
-  }, [count]);
+const Button = () => {
+  //   const [count, setCount] = useState(0);
+  //   useEffect(() => {
+  //     console.log(count);
+  //   }, [count]);
 
   return (
     <>
       <h1>Button</h1>
       <section>
-        <article>
+        {/* <article>
           <h2>{props.property}</h2>
           <button
             onClick={() => {
@@ -24,14 +24,14 @@ const Button = (props) => {
           </button>
           <p>{count}</p>
           <Link to="/">See More</Link>
-        </article>
+        </article> */}
       </section>
     </>
   );
 };
 
-Button.propTypes = {
-  property: PropTypes.string,
-};
+// Button.propTypes = {
+//   property: PropTypes.string,
+// };
 
 export default Button;

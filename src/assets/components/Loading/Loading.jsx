@@ -1,17 +1,17 @@
 // import { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
-import "./Card.css";
+// import './Loading.css';
 
-const Card = () => {
-  // const [count, setCount] = useState(0);
-  // useEffect(() => {
-  //   console.log(count);
-  // }, [count]);
+const Loading = () => {
+  //   const [count, setCount] = useState(0);
+  //   useEffect(() => {
+  //     console.log(count);
+  //   }, [count]);
 
   return (
     <>
-      <h1>Card</h1>
+      <h1>Loading</h1>
       <section>
         {/* <article>
           <h2>{props.property}</h2>
@@ -30,8 +30,8 @@ const Card = () => {
   );
 };
 
-// Card.propTypes = {
+// Loading.propTypes = {
 //   property: PropTypes.string,
 // };
 
-export default Card;
+export default Loading;

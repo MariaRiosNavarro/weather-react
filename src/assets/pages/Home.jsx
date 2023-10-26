@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { randomCities } from "../db/randomCites";
 import "./Home.scss";
+import { randomCities } from "../db/randomCites";
+import NoGeo from "../components/NoGeo/NoGeo";
+import Loading from "../components/Loading/Loading";
 
 // Create a universal Fetch function
 
@@ -13,46 +15,45 @@ const fetchData = async (fetchObject) => {
       throw new Error("Network response was not ok");
     } else {
       const data = await response.json();
-      console.log(data, "func");
-
       return data;
     }
   } catch (error) {
     console.error(fetchObject.message, error);
-    throw error;
-    // } finally {
-    //   console.log("Add cleanup code here (if needed)");
+    // throw error;
   }
 };
-
-// fetchObject für oben, ich mache eine Function, dass ein Object rausgibt um in den Fetch zu benutzen
-
-let fetchObj;
-
-const fetchParams = (lat, lon) => {
-  return (fetchObj = {
-    url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=a210fd9e00bee0d760dcfd2fc1cb1ef5`,
-    message: `With the Geolocalisation and Fetch of this Place: lat:${lat} & lon:${lon} was an Issue`,
-  });
-};
-
-// const randomObject = ()=>{
-
-// }
 
 const Home = (props) => {
   const [geolocalitation, setGeolocalitation] = useState(false);
   const [weatherData, setWeatherData] = useState();
 
-  // Geolocalisierung allgemein
-
   useEffect(() => {
+    // first one is the Object to use in fetchData
+    let fetchObj, randomIndex, randomCity;
+
+    const random = (n) => {
+      return (randomIndex = Math.round(Math.random() * n));
+    };
+
+    // TODO:here check!
+    console.log(randomCities.length);
+
+    // function to change the object for all lat and lon
+    const fetchParams = (lat, lon) => {
+      return (fetchObj = {
+        url: `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=a210fd9e00bee0d760dcfd2fc1cb1ef5`,
+        message: `With the Geolocalisation and Fetch of this Place: lat:${lat} & lon:${lon} was an Issue`,
+      });
+    };
+
+    // geocalisation general
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setGeolocalitation(true);
-        // Create the Object for the fetch
-        fetchParams(position.coords.latitude, position.coords.longitude);
-        // Use the object in the fetch and save in a variable for the state
+        fetchObj = fetchParams(
+          position.coords.latitude,
+          position.coords.longitude
+        );
         fetchData(fetchObj)
           .then((data) => {
             setWeatherData(data);
@@ -61,34 +62,49 @@ const Home = (props) => {
             console.error("Error fetching data:", error);
           });
       });
+      //  if no geocalisation -> use a random city of the randomCity-array
     } else {
-      console.log("no geolocalisation");
       setGeolocalitation(false);
+      //   noGeoMessage visibility:visible!
+      randomIndex = random(randomCities.length);
+      randomCity = randomCities[randomIndex];
+      fetchObj = fetchParams(randomCity.lat, randomCity.lon);
+      fetchData(fetchObj)
+        .then((data) => {
+          setWeatherData(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     }
   }, []);
 
-  console.log(weatherData, "last");
+  if (!weatherData) {
+    return <Loading />;
+  }
 
-  //   useEffect(() => {
-  //     fetchAsync();
-  //   }, []);
+  console.log("here!!!!!!!", weatherData);
+  console.log(geolocalitation);
+
+  //   Transformation
+
+  let name, coords, country, population, timezone, sunrise, sunset;
+
+  name = weatherData.city.name;
+  coords = `{weatherData.city.coords.lat}, {weatherData.city.coords.lon}`;
+  country = weatherData.city.country;
+  population = weatherData.city.population;
+  timezone = weatherData.city.timezone;
+  sunrise = weatherData.city.sunrise;
+  sunset = weatherData.city.sunset;
 
   return (
     <>
-      <h1>Home</h1>
+      <h1>Props Weather</h1>
+      <h2>The weather for the next few days around the world</h2>
+      {!geolocalitation ? <NoGeo /> : ""}
       <section>
-        <article>
-          <h2>{props.property}</h2>
-          {/* <button
-            onClick={() => {
-              setCount(count + 1);
-            }}
-          >
-            click +1
-          </button>
-          <p>{count}</p> */}
-          <Link to="/">See More</Link>
-        </article>
+        <Card />
       </section>
     </>
   );
