@@ -49,14 +49,12 @@ const Home = () => {
   const [weatherData, setWeatherData] = useState();
 
   useEffect(() => {
-    // first one is the Object to use in fetchData
+    // first one variable is the Object to use in fetchData
     let fetchObj, randomIndex, randomCity;
 
     const random = (n) => {
       return (randomIndex = Math.round(Math.random() * n));
     };
-
-    console.log("arraycity-length", randomCities.length);
 
     // function to change the object for all lat and lon
     const fetchParams = (lat, lon) => {
@@ -184,7 +182,7 @@ const Home = () => {
 
   return (
     <>
-      <h1>Props Weather</h1>
+      <h1>Weather PROP(g)Nose</h1>
       {!geolocalitation ? <NoGeo /> : ""}
       <section>
         <Card
