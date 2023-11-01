@@ -209,8 +209,4 @@ const Home = () => {
   );
 };
 
-// Home.propTypes = {
-//   property: PropTypes.string,
-// };
-
 export default Home;

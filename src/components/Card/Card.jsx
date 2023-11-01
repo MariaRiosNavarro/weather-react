@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import Button from "../Button/Button";
+import "./Card.css";
 
 const Card = ({
   name,
@@ -25,9 +26,11 @@ const Card = ({
           <h4>Sunrise: {sunrise}</h4>
           <h4>Sunset: {sunset}</h4>
           <Button text="hallo" className="btn btn-primary" />
-          <Button text="alert" className="border-none" />
+          <Button text="alert" className="btn border-none btn-primary" />
           <Button text="other" className="btn btn-accent btn-outline" />
-          <button>test</button>
+          <button className="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900">
+            test
+          </button>
         </article>
       </section>
     </>
