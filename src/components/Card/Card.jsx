@@ -1,6 +1,6 @@
-// import "./Card.scss";
 import PropTypes from "prop-types";
 import React from "react";
+import Button from "../Button/Button";
 
 const Card = ({
   name,
@@ -15,8 +15,8 @@ const Card = ({
   return (
     <>
       <section>
-        <article className="card  bg-primary">
-          <h2>{name}</h2>
+        <article className="card  bg-secundary">
+          <h2 className="bg-red-900">{name}</h2>
           <h3>{country}</h3>
           <h3>Coords: {coords}</h3>
           <h3>Date: {date}</h3>
@@ -24,6 +24,10 @@ const Card = ({
           <h3>Time of weather data: {time}</h3>
           <h4>Sunrise: {sunrise}</h4>
           <h4>Sunset: {sunset}</h4>
+          <Button text="hallo" className="btn btn-primary" />
+          <Button text="alert" className="border-none" />
+          <Button text="other" className="btn btn-accent btn-outline" />
+          <button>test</button>
         </article>
       </section>
     </>
