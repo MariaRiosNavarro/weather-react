@@ -15,7 +15,7 @@ const Card = ({
   return (
     <>
       <section>
-        <article className="info-card">
+        <article className="card  bg-primary">
           <h2>{name}</h2>
           <h3>{country}</h3>
           <h3>Coords: {coords}</h3>
