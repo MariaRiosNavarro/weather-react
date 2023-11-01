@@ -2,6 +2,7 @@
 // import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
 // import "./NoGeo.css";
+import React from "react";
 
 const NoGeo = () => {
   //   const [count, setCount] = useState(0);

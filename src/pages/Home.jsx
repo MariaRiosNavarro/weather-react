@@ -1,7 +1,5 @@
+import React from "react";
 import { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import PropTypes from "prop-types";
-// import "./Home.scss";
 import { randomCities } from "../db/randomCites";
 import { countries } from "../db/countries";
 import NoGeo from "../components/NoGeo/NoGeo";

@@ -1,7 +1,7 @@
 // import { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import "./WeatherCard.scss";
+import React from "react";
 
 const WeatherCard = ({
   iconSrc,
@@ -14,18 +14,13 @@ const WeatherCard = ({
   clouds,
   description,
 }) => {
-  // const [count, setCount] = useState(0);
-  // useEffect(() => {
-  //   console.log(count);
-  // }, [count]);
-
   return (
     <>
       <article>
-        <div className="img-wrapper">
+        <div>
           <img src={iconSrc} alt="icon" />
         </div>
-        <div className="text-wrapper">
+        <div>
           <h2>{temp}°</h2>
           <h2>
             {min}° ↔ {max}°

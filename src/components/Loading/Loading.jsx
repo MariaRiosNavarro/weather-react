@@ -2,6 +2,7 @@
 // import { Link } from "react-router-dom";
 // import PropTypes from "prop-types";
 // import './Loading.css';
+import React from "react";
 
 const Loading = () => {
   //   const [count, setCount] = useState(0);
